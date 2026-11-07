@@ -1,0 +1,21 @@
+[Unit]
+Description=Conveyor jam monitor (VLM on Jetson AGX Orin, screen on 8082)
+# カメラ、VLM、conveyor-mcp が後から立ち上がっても、監視は応答するまで待つ。依存で起動を止めない
+Wants=network-online.target camera-preview.service
+After=network-online.target camera-preview.service conveyor-mcp.service
+StartLimitIntervalSec=120
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=<USER>
+WorkingDirectory=/home/<USER>/line-monitor
+# 起動・終了ではコンベアに触らない。止めるときは SIGTERM（Ctrl+C と同じ後片付け。推論の終わりを数秒待つ）
+ExecStart=/home/<USER>/line-monitor/.venv/bin/python -u /home/<USER>/line-monitor/monitor.py --control --mcp-url http://<CONVEYOR_MCP_IP>:8000/mcp --vlm-url http://<VLM_IP>:8001/v1/chat/completions --interval 0.5 --mqtt-host <MQTT_IP>
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

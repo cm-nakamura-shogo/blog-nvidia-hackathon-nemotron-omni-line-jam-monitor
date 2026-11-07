@@ -1,0 +1,22 @@
+[Unit]
+Description=Lane camera (MJPEG for the jam monitor)
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=120
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=<USER>
+SupplementaryGroups=video
+WorkingDirectory=/home/<USER>/line-monitor
+# LINE_CAMERA: /dev/v4l/by-id/... のカメラ（install.sh が書く）
+EnvironmentFile=/etc/line-monitor/environment
+# ダッシュボードなど別の機械からも読むので、LAN に出す。同じ機械の監視は 127.0.0.1 のまま読める
+ExecStart=/home/<USER>/line-monitor/.venv/bin/python -u /home/<USER>/line-monitor/camera_preview.py --host 0.0.0.0 --camera ${LINE_CAMERA}
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
