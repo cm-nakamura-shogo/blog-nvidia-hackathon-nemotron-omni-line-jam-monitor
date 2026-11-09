@@ -1,4 +1,4 @@
-# blog-jetson-line-monitor-vlm
+# blog-nvidia-hackathon-nemotron-omni-line-jam-monitor
 
 ベルトコンベアの詰まりをカメラと VLM（Nemotron 3 Nano Omni 30B-A3B）で見つけて止め、人の 👍 で再開する監視のサンプルです。VLM は Jetson AGX Orin 上の llama.cpp で動かします。
 
@@ -16,7 +16,7 @@
                └─ 画面 :8082（状態・操作・ROI の調整）
 ```
 
-コンベアの MCP サーバーは [blog-jetson-conveyor-mcp](https://github.com/cm-nakamura-shogo/blog-jetson-conveyor-mcp) を使います。
+コンベアの MCP サーバーは [blog-nvidia-hackathon-conveyor-mcp](https://github.com/cm-nakamura-shogo/blog-nvidia-hackathon-conveyor-mcp) を使います。
 
 | ファイル | 内容 |
 | --- | --- |
