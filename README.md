@@ -2,7 +2,7 @@
 
 ベルトコンベアの詰まりをカメラと VLM（Nemotron 3 Nano Omni 30B-A3B）で見つけて止め、人の 👍 で再開する監視のサンプルです。VLM は Jetson AGX Orin 上の llama.cpp で動かします。
 
-ブログ記事: <!-- TODO: 記事のURL -->
+ブログ記事: https://dev.classmethod.jp/articles/nvidia-hackathon-nemotron-omni-line-jam-monitor/
 
 ## 構成
 
